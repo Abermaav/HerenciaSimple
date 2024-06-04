@@ -1,4 +1,4 @@
-public class Estudiante extends persona{
+public class Estudiante extends Persona {
     private int nmCarnet;
 
     public Estudiante(){
@@ -7,7 +7,7 @@ public class Estudiante extends persona{
     }
 
 
-    public Estudiante(persona per, int nmCarnet) {
+    public Estudiante(Persona per, int nmCarnet) {
         super(per);
         this.nmCarnet = nmCarnet;
     }
@@ -16,7 +16,6 @@ public class Estudiante extends persona{
         super(est);
         this.nmCarnet=est.nmCarnet;
     }
-
     public int getNmCarnet() {
         return nmCarnet;
     }

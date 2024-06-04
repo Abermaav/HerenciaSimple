@@ -1,10 +1,9 @@
 import java.util.Date;
 
-public class persona {
+public class Persona {
     private int id, tipoId;
-    private  String nombre, apellidos, tipodeSangre;
+    private  String nombre, apellidos, tipodeSangre,genero;
     private Date nacimiento;
-    private char genero;
     private double peso, estatura;
 //Constantes
     static final int SIN_REGISTRAR=0;
@@ -13,17 +12,17 @@ public class persona {
     static final int CEDULA_CIUDADANIA=3;
     static final int PASAPORTE=4;
     static final int CEDULA_EXTRANJERA=5;
-    public persona(){
+    public Persona(){
         this.id=0;
         this.tipoId= 0;
         this.apellidos=" ";
         this.nombre=" ";
-        this.genero= ' ';
+        this.genero= " ";
         this.tipodeSangre=" ";
         this.peso= 0.0;
         this.estatura=0.0;
     }
-    public persona(persona per){
+    public Persona(Persona per){
         this.id=per.id;
         this.tipoId= per.tipoId;
         this.apellidos=per.apellidos;
@@ -84,10 +83,10 @@ public class persona {
         this.peso = peso;
     }
 
-    public char getGenero() {
+    public String getGenero() {
         return genero;
     }
-    public void setGenero(char genero) {
+    public void setGenero(String genero) {
         this.genero = genero;
     }
 

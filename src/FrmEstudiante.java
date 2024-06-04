@@ -1,12 +1,18 @@
-import com.toedter.calendar.JCalendar;
 import com.toedter.calendar.JDateChooser;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Date;
 
 public class FrmEstudiante extends JFrame implements ActionListener {
+
+    static final int Cantidad_Maxima_Estudiantes=10;
+    int contador=0;
+    Estudiante vecEstudiantes[]= new Estudiante[Cantidad_Maxima_Estudiantes];
+    Estudiante est;
+
     JPanel p1, p2;
     JButton guardar, limpiar;
     JLabel l1, l2, l3, l4, l5, l6 ,l7, l8 ,l9, l10;
@@ -14,7 +20,7 @@ public class FrmEstudiante extends JFrame implements ActionListener {
     JComboBox tipoD, sangre, sexo;
     JDateChooser nacimiento;
 
-
+//ID = numeroD
 
     FrmEstudiante(){
         setTitle("Estudiante");
@@ -98,6 +104,7 @@ public class FrmEstudiante extends JFrame implements ActionListener {
 
         sexo=new JComboBox();
         sexo.setBounds(16, 205, 110, 30);
+        sexo.addItem("SIN REGISTRO");
         sexo.addItem("Masculino");
         sexo.addItem("Femenino");
 
@@ -131,11 +138,13 @@ public class FrmEstudiante extends JFrame implements ActionListener {
         sangre.addItem("AB+");
         sangre.addItem("AB-");
 
+
         estatura=new JTextField();
         estatura.setBounds(156, 260, 110, 30);
 
         guardar=new JButton("Guardar");
         guardar.setBounds(20, 40, 260, 80);
+        guardar.addActionListener(this);
 
         limpiar=new JButton("Limpiar");
         limpiar.setBounds(20, 140, 260, 80);
@@ -188,6 +197,35 @@ public class FrmEstudiante extends JFrame implements ActionListener {
             sexo.setSelectedIndex(-1);
             numeroD.grabFocus();
 
+        }
+        if (evento.getSource() == guardar) {
+            if (contador<vecEstudiantes.length){
+                int ID=Integer.parseInt(numeroD.getText());
+                int tipod=(tipoD.getSelectedIndex());
+                int Carnet=Integer.parseInt(carnet.getText());
+                String Nombre= nombre.getText();
+                String Apellido= apellido.getText();
+                Date fecha= nacimiento.getDate();
+                String tipoSangre= sangre.getSelectedItem().toString();
+                String genero= sexo.getSelectedItem().toString();
+
+                Persona estudiante = new Persona();
+                estudiante.setNombre(Nombre);
+                estudiante.setId(ID);
+                estudiante.setTipoId(tipod);
+                estudiante.setApellidos(Apellido);
+                estudiante.setNacimiento(fecha);
+                estudiante.setTipodeSangre(tipoSangre);
+                estudiante.setGenero(genero);
+
+                est = new Estudiante(estudiante, Carnet);
+                vecEstudiantes[contador] = est;
+                contador++;
+                JOptionPane.showMessageDialog(this,"Se ha ingresado un nuevo estudiante");
+            }
+            else {
+            JOptionPane.showMessageDialog(this,"No hay espacio para ingresar mas estudiantes");
+            }
         }
     }
 }
